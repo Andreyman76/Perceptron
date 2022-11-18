@@ -39,15 +39,17 @@ def test(p: Perceptron, data, target):
 
 
 def main():
+    # Use dataset from sklearn
     iris = datasets.load_iris()
     data = iris['data']
+    # Convert target data from class indices to a vector of zeros and ones
     target = [[1.0 if i == j else 0.0 for j in range(3)] for i in iris['target']]
 
-    #p = Perceptron([4, 16, 8, 3])
-    p = Perceptron(filename='iris.json')
+    p = Perceptron([4, 16, 8, 3])  # Comment it out if you are retraining the perceptron
+    #p = Perceptron(filename='iris.json')  # Comment it out if you are creating a perceptron
 
-    for epoch in range(1000):
-        e = train_epoch(p, data, target, 0.00001)
+    for epoch in range(1001):
+        e = train_epoch(p, data, target, 0.001)
         if epoch % 100 == 0:
             print(f'Epoch {epoch}, error = {e}')
 
@@ -60,4 +62,4 @@ def main():
 
 
 if __name__ == '__main__':
-    p = Perceptron([3, 4, 5, 2])
+    main()
